@@ -1,8 +1,11 @@
 "use client";
 
 import React, { useState } from "react";
+import Image from "next/image";
 import { motion, AnimatePresence } from "framer-motion";
 import { ArrowUpRight, ArrowRight } from "lucide-react";
+
+const MotionImage = motion.create(Image);
 
 interface ServiceItem {
   id: number;
@@ -63,9 +66,11 @@ function TestimonialCard() {
   return (
     <div className="flex flex-col sm:flex-row p-5 items-center justify-between gap-4 w-full rounded-[13px] bg-[#EDFBEA]">
       <div className="flex items-center gap-3">
-        <img
+        <Image
           src="https://images.unsplash.com/photo-1472099645785-5658abf4ff4e?q=80&w=100&auto=format&fit=crop"
           alt="William Johnson"
+          width={48}
+          height={48}
           className="w-12 h-12 rounded-full object-cover"
           referrerPolicy="no-referrer"
         />
@@ -123,7 +128,7 @@ function ServiceCard({
           <div className="flex items-center gap-2">
             <h4
               className={
-                "font-crimson text-[24px] lg:text-[30px] font-semibold leading-[32px] lg:leading-[36px] tracking-[-0.2px] whitespace-nowrap " +
+                "font-crimson text-[24px] lg:text-[30px] font-semibold leading-[32px] lg:leading-[36px] tracking-[-0.2px] min-w-0 " +
                 (isActive ? "text-white" : "text-[#093600]")
               }
             >
@@ -176,11 +181,13 @@ function ServiceCard({
             <p className="font-inter text-[14px] lg:text-[18px] font-normal leading-[22px] lg:leading-[26px] tracking-[-0.18px] text-[#EDFBEA] opacity-80 mt-2 mb-4 lg:max-w-none">
               {service.description}
             </p>
-            <div className="md:hidden w-full aspect-[16/11] rounded-[24px] overflow-hidden mb-1 shadow-sm">
-              <img
+            <div className="md:hidden relative w-full aspect-[16/11] rounded-[24px] overflow-hidden mb-1 shadow-sm">
+              <Image
                 src={service.image}
                 alt={service.title}
-                className="w-full h-full object-cover"
+                fill
+                sizes="(max-width: 767px) 100vw, 0px"
+                className="object-cover"
                 referrerPolicy="no-referrer"
               />
             </div>
@@ -211,6 +218,7 @@ export default function Features({ className }: { className?: string }) {
       />
 
       <section
+        id="services"
         className={
           "w-full py-16 px-4 sm:px-6 lg:px-8 bg-[#fcfcfc] " + (className || "")
         }
@@ -229,15 +237,17 @@ export default function Features({ className }: { className?: string }) {
             <div className="w-full md:w-1/2 flex flex-col gap-6 order-2 md:order-1">
               <div className="hidden md:block relative w-full aspect-[560/500] lg:h-[600px] rounded-[30px] overflow-hidden shadow-sm">
                 <AnimatePresence mode="wait">
-                  <motion.img
+                  <MotionImage
                     key={currentIndex}
                     src={services[currentIndex].image}
                     alt={services[currentIndex].title}
+                    fill
+                    sizes="(max-width: 767px) 100vw, 50vw"
                     initial={{ opacity: 0, scale: 1.05 }}
                     animate={{ opacity: 1, scale: 1 }}
                     exit={{ opacity: 0, scale: 1.05 }}
                     transition={{ duration: 0.5, ease: "easeInOut" as const }}
-                    className="w-full h-full object-cover"
+                    className="object-cover"
                     referrerPolicy="no-referrer"
                   />
                 </AnimatePresence>

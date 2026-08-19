@@ -28,6 +28,15 @@ body {
   color: var(--foreground);
   @apply font-sans;
 }
+
+/* Prevent horizontal page scroll on small viewports (down to 320px) while
+   keeping contained horizontal scrollers (tabs/carousels) working. */
+html,
+body {
+  overflow-x: hidden;
+  overflow-x: clip;
+}
+
 button {
   cursor: pointer;
 }
