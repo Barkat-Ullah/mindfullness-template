@@ -1,10 +1,12 @@
 "use client";
 
+import Features from "./components/Feature";
+
 const Home = () => {
   return (
-    <div>
-      <h2 className="text-center my-8">Welcome to the Home Page</h2>
-    </div>
+    <>
+      <Features />
+    </>
   );
 };
 
